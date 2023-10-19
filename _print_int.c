@@ -1,5 +1,11 @@
 #include "main.h"
 
+/**
+ * _rec_print_int - recursively prints
+ * integer values to stdout
+ * @i: pointer to integer
+ * @c: pointer to characters counter
+ */
 void _rec_print_int(int *i, int *c)
 {
 	int n = *i;
@@ -15,21 +21,19 @@ void _rec_print_int(int *i, int *c)
 	_rec_print_int(i, c);
 
 	*c += _putchar((n % 10) + '0');
-	
-	return;
 }
 
 /**
- * print_int - prints integer to
+ * _print_int - prints integer to
  * stdout
  * @arg: a pointer to list containing
  * integer to be printed
- * 
+ *
  * Return: number of characters printed
  */
 int _print_int(va_list arg)
 {
-	int i, c, p, r;
+	int c, i;
 
 	c = 0;
 	i = va_arg(arg, int);

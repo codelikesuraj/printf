@@ -1,11 +1,10 @@
 #include "main.h"
 
 /**
- * print_int - prints integer to
- * stdout
+ * _print_str - prints string to stdout
  * @arg: a pointer to list containing
  * integer to be printed
- * 
+ *
  * Return: number of characters printed
  */
 int _print_str(va_list arg)

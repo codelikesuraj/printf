@@ -1,4 +1,57 @@
-#include "main.h" 
+#include "main.h"
+
+/**
+ * _check_spec - check if any specifier
+ * is set and print accordingly
+ * @c: pointer to character counter
+ * @f: pointer to character string
+ * composed of one or more directives
+ * @args: pointer to list containing
+ * arguments
+ */
+void _check_spec(int *c, const char *f, va_list args)
+{
+	int i, j = 0;
+	print_func funcs[] = {
+		{'c', _print_char},
+		{'d', _print_int},
+		{'i', _print_int},
+		{'o', _print_u_oct},
+		{'p', _print_ptr},
+		{'s', _print_str},
+		{'u', _print_u_int},
+		{'X', _print_u_HEX},
+		{'x', _print_u_hex}
+	};
+
+	for (i = 0; *(f + i) != '\0';  i++)
+	{
+		if (!(*(f + i) == '%' && *(f + i + 1)))
+		{
+			*c += _putchar(f[i]);
+			continue;
+		}
+
+		if (*(f + i + 1) - '%' == 0)
+		{
+			*c += _putchar('%');
+			i++;
+			continue;
+		}
+
+		while (j < 9 && (*(f + i + 1) != funcs[j].type))
+			j++;
+
+		if (j < 9)
+		{
+			*c += funcs[j].func(args);
+			i++;
+			continue;
+		}
+
+		*c += _putchar(f[i]);
+	}
+}
 
 /**
  * _printf - produces output according
@@ -13,65 +66,12 @@
  */
 int _printf(const char *format, ...)
 {
-	int c, i;
+	int c = 0;
 	va_list args;
-	
-	c = 0;
+
 	va_start(args, format);
 
-	for (i = 0; *(format + i) != '\0';  i++)
-	{
-		if (*(format + i) == '%' && *(format + i + 1))
-		{
-			switch (*(format + i + 1))
-			{
-				case '%':
-					c += _putchar('%');
-					i++;
-					break;
-				case 'c':
-					c += _print_char(args);
-					i++;
-					break;
-				case 'd':
-				case 'i':
-					c += _print_int(args);
-					i++;
-					break;
-				case 'o':
-					c += _print_unsigned_oct(args);
-					i++;
-					break;
-				case 'p':
-					c += _print_ptr(args);
-					i++;
-					break;
-				case 's':
-					c += _print_str(args);
-					i++;
-					break;
-				case 'u':
-					c += _print_unsigned_int(args);
-					i++;
-					break;
-				case 'X':
-					c += _print_unsigned_hex(args, 0);
-					i++;
-					break;
-				case 'x':
-					c += _print_unsigned_hex(args, 1);
-					i++;
-					break;
-				default:
-					c += _putchar(format[i]);
-					break;
-			}
-		}
-		else
-		{
-			c += _putchar(format[i]);
-		}
-	}
+	_check_spec(&c, format, args);
 
 	va_end(args);
 
