@@ -69,7 +69,7 @@ int _printf(const char *format, ...)
 	int c = 0;
 	va_list args;
 
-	if (format == NULL)
+	if (format == NULL || (format == '%' && *(format + 1) == '\0'))
 		return (-1);
 
 	va_start(args, format);
