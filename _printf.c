@@ -14,19 +14,18 @@ void _check_spec(int *c, const char *f, va_list args)
 	int i, j = 0;
 	print_func funcs[] = {
 		{'c', _print_char},
-		{'d', _print_int},
-		{'i', _print_int},
+		{'d', _print_int}, {'i', _print_int},
 		{'o', _print_u_oct},
 		{'p', _print_ptr},
 		{'s', _print_str},
 		{'u', _print_u_int},
-		{'X', _print_u_HEX},
-		{'x', _print_u_hex}
+		{'X', _print_u_HEX}, {'x', _print_u_hex}
 	};
 
 	for (i = 0; *(f + i) != '\0';  i++)
 	{
 		j = 0;
+
 		if (!(*(f + i) == '%' && *(f + i + 1)))
 		{
 			*c += _putchar(f[i]);
