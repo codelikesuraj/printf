@@ -26,6 +26,7 @@ void _check_spec(int *c, const char *f, va_list args)
 
 	for (i = 0; *(f + i) != '\0';  i++)
 	{
+		j = 0;
 		if (!(*(f + i) == '%' && *(f + i + 1)))
 		{
 			*c += _putchar(f[i]);
