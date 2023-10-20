@@ -16,7 +16,7 @@ int _print_str(va_list arg)
 	s = va_arg(arg, char *);
 
 	if (s == NULL)
-		exit(-1);
+		s = "(null)";
 
 	for (i = 0;  *(s + i) != '\0'; i++)
 		c += _putchar(*(s + i));
