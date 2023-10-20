@@ -6,9 +6,9 @@
  * @i: pointer to integer
  * @c: pointer to characters counter
  */
-void _rec_print_int(int *i, int *c)
+void _rec_print_int(long int *i, int *c)
 {
-	int n = *i;
+	long int n = *i;
 
 	if (n >= 0 && n <= 9)
 	{
@@ -33,7 +33,8 @@ void _rec_print_int(int *i, int *c)
  */
 int _print_int(va_list arg)
 {
-	int c, i;
+	int c;
+	long int i;
 
 	c = 0;
 	i = va_arg(arg, int);
