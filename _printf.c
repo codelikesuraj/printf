@@ -69,6 +69,9 @@ int _printf(const char *format, ...)
 	int c = 0;
 	va_list args;
 
+	if (format == NULL)
+		return (0);
+
 	va_start(args, format);
 
 	_check_spec(&c, format, args);
